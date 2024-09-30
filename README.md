@@ -1,21 +1,21 @@
-# Pong Game
+# Pong Retro
 
-¡Bienvenido a la implementación del clásico juego Pong! Este juego fue desarrollado utilizando Python y la biblioteca Pygame, ofreciendo una experiencia divertida y emocionante para dos jugadores.
+Este proyecto es una recreación del clásico juego Pong, desarrollado utilizando la biblioteca Pygame. La versión implementada conserva la esencia retro del original, con algunas personalizaciones en la interfaz y el sonido.
 
-## Descripción
+## Características
+- **Interfaz gráfica**: El juego presenta gráficos simples y colores llamativos que recuerdan el estilo retro de los años 70.
+- **Sonido**: Incluye efectos de sonido cuando la pelota golpea las paletas o las paredes, añadiendo realismo y una mejor experiencia de juego.
+- **Puntaje dinámico**: Se lleva un registro de los puntos para ambos jugadores y se muestra en la pantalla en tiempo real.
+- **Control intuitivo**: Los jugadores pueden controlar sus paletas usando las teclas `W`/`S` para el Jugador 1 y las flechas `Arriba`/`Abajo` para el Jugador 2.
 
-Pong es un videojuego que simula una competencia de tenis de mesa. Dos jugadores controlan paletas en los extremos de la pantalla para golpear una pelota que se mueve entre ellos. El objetivo es marcar puntos haciendo que la pelota pase por el lado del oponente.
-
-### Características
-
-- Dos jugadores pueden jugar en la misma pantalla.
-- Control intuitivo de las paletas.
-- Sonidos de impacto y puntuación.
-- Opción para establecer el número de puntos necesarios para ganar.
+## Cómo jugar
+1. Ejecuta el script y elige el número de puntos necesarios para ganar.
+2. Controla las paletas con las teclas mencionadas y trata de evitar que la pelota cruce tu lado.
+3. El primer jugador en alcanzar el número de puntos establecido será declarado ganador.
 
 ## Requisitos
-
-Antes de ejecutar el juego, asegúrate de tener instalado Python y Pygame en tu sistema. Puedes instalar Pygame utilizando pip:
-
-```bash
-pip install pygame
+- **Python 3.8 o superior**
+- **Pygame**: Para instalar Pygame, ejecuta:
+  ```bash
+  pip install pygame
+  pip install pygame-textinput
