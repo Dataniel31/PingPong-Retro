@@ -1,5 +1,5 @@
 import pygame as pg
-
+import pygame_textinput
 
 # Configurar el ancho y alto de la pantalla
 ANCHO_PANTALLA = 900
@@ -86,31 +86,37 @@ def mostrar_menu_inicial():
     mensaje_inicio = calibri_bold_35.render("¿A cuántos puntos jugamos esta partida?", True, BLANCO)
     pantalla.blit(mensaje_inicio, (ANCHO_PANTALLA // 2 - mensaje_inicio.get_width() // 2, ALTO_PANTALLA // 2 - 100))
 
-    opcion_5 = calibri_bold_25.render("5 puntos (1)", True, BLANCO)
-    pantalla.blit(opcion_5, (ANCHO_PANTALLA // 2 - 200, ALTO_PANTALLA // 2 - 30))
-
-    opcion_10 = calibri_bold_25.render("10 puntos (2)", True, BLANCO)
-    pantalla.blit(opcion_10, (ANCHO_PANTALLA // 2 - 200, ALTO_PANTALLA // 2 + 20))
-
-    opcion_15 = calibri_bold_25.render("15 puntos (3)", True, BLANCO)
-    pantalla.blit(opcion_15, (ANCHO_PANTALLA // 2 - 200, ALTO_PANTALLA // 2 + 70))
-
-    pg.display.flip()
+    # Crear el campo de texto
+    textinput = pygame_textinput.TextInputVisualizer()
+    clock = pg.time.Clock()
 
     while True:
-        for e in pg.event.get():
+        pantalla.fill(NEGRO)
+        pantalla.blit(titulo, (ANCHO_PANTALLA // 2 - titulo.get_width() // 2, ALTO_PANTALLA // 2 - 200))
+        pantalla.blit(icono_escalado, (ANCHO_PANTALLA // 2 + titulo.get_width() // 2 + 10, ALTO_PANTALLA // 2 - 200))
+        pantalla.blit(mensaje_inicio, (ANCHO_PANTALLA // 2 - mensaje_inicio.get_width() // 2, ALTO_PANTALLA // 2 - 100))
+
+        # Renderizar el campo de texto
+        pantalla.blit(textinput.surface, (ANCHO_PANTALLA // 2 - 50, ALTO_PANTALLA // 2 + 50))
+
+        # Actualizar los eventos
+        eventos = pg.event.get()
+        for e in eventos:
             if e.type == pg.QUIT:
                 pg.quit()
                 quit()
-            if e.type == pg.KEYDOWN:
-                if e.key == pg.K_1:
-                    return 5
-                elif e.key == pg.K_2:
-                    return 10
-                elif e.key == pg.K_3:
-                    return 15
 
-        mi_reloj.tick(10)
+        # Actualizar el campo de texto
+        textinput.update(eventos)
+
+        # Si se presiona Enter, verificar el valor
+        if textinput.value.isdigit() and pg.key.get_pressed()[pg.K_RETURN]:
+            puntos_para_ganar = int(textinput.value)
+            if puntos_para_ganar > 0:
+                return puntos_para_ganar
+
+        pg.display.flip()
+        clock.tick(30)
 
 
 def verificar_ganador():
@@ -124,7 +130,7 @@ def verificar_ganador():
 def mostrar_ganador():
     pantalla.fill(NEGRO)
     mensaje = calibri_bold_25.render("¡Ha ganado " + ganador + "!", True, BLANCO)
-    pantalla.blit(mensaje, (ANCHO_PANTALLA//2 - mensaje.get_width()//2, ALTO_PANTALLA//2-100))
+    pantalla.blit(mensaje, (ANCHO_PANTALLA // 2 - mensaje.get_width() // 2, ALTO_PANTALLA // 2 - 100))
 
     mensaje_reinicio = calibri_bold_25.render("¿Quieres volver a jugar?", True, BLANCO)
     pantalla.blit(mensaje_reinicio, (ANCHO_PANTALLA // 2 - mensaje_reinicio.get_width() // 2, ALTO_PANTALLA // 2))
